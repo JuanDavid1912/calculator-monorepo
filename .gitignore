@@ -1,0 +1,40 @@
+# =========================
+# Frontend (React / pnpm)
+# =========================
+node_modules/
+dist/
+dist-ssr/
+*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# Backend (Go)
+# =========================
+# Ignore compiled binaries
+/backend/calculator-backend
+/backend/calculator-backend.exe
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# =========================
+# Environment Variables (Critical!)
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# System and Editor Files
+# =========================
+.DS_Store
+.vscode/
+!.vscode/extensions.json
+.idea/
