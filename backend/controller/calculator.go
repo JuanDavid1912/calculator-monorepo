@@ -23,6 +23,11 @@ func (c *CalculatorController) HandleCalculate(w http.ResponseWriter, r *http.Re
 	w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
+	if r.Method == http.MethodOptions {
+		w.WriteHeader(http.StatusOK)
+		return
+	}
+
 	var op model.Operation
 	if err := json.NewDecoder(r.Body).Decode(&op); err != nil {
 		c.writeJSON(w, http.StatusBadRequest, model.Result{Error: "Invalid JSON format"})

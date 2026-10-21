@@ -13,7 +13,7 @@ const (
 )
 
 type Operation struct {
-	A        float64      `json:"a,omitempty"`
+	A        float64      `json:"a"`
 	B        float64      `json:"b"`
 	Operator OperatorType `json:"operation"`
 }
