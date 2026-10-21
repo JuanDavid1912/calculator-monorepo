@@ -81,7 +81,7 @@ The application uses a multi-stage Dockerfile that builds both the Go backend an
 
 ---
 
-## 🔌 API Reference
+## API Reference
 
 The Go backend exposes a single REST endpoint for mathematical operations.
 
@@ -137,6 +137,10 @@ curl -X POST http://localhost:8080/api/calculate \
 
 - **Unified Containerization:** A multi-stage Dockerfile is used. It compiles the Go binary using `golang:alpine` and the React static files using `node:22-alpine`. The final production stage uses a bare `alpine:latest` image, leveraging `busybox-extras` to run a lightweight `httpd` static server on port `80` while executing the Go binary concurrently on port `8080`.
 
-- **Testing Strategy:** Quality is enforced across the stack. The backend employs Go's standard library testing for business logic, while the frontend leverages modern tooling (Vitest, React Testing Library, happy-dom) for isolated UI and interaction testing without requiring a live backend. 
+- **Testing Strategy:** Quality is enforced across the stack. The backend employs Go's standard library testing for business logic, while the frontend leverages modern tooling (Vitest, React Testing Library, happy-dom) for isolated UI and interaction testing without requiring a live backend.
   - To run backend tests: `cd backend && go test ./... -v`
   - To run frontend tests: `cd frontend && pnpm run test`
+
+- **Assumptions:**
+  - **`square_root` ignores `b`:** Square root is a single-operand operation, so only `a` is used. Any value sent in `b` is ignored by the backend.
+  - **`percent` means "`a` percent of `b`":** `a` is the percentage and `b` is the base value. For example, to get 10% of 100, send `{"a": 10, "b": 100, "operation": "percent"}` and the result will be `10`.
